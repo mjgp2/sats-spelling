@@ -446,7 +446,7 @@
             // Assigning weight: More weight to words never tried or often incorrect
             let weight = last ? 1 : ( incorrect === 0 ? 10 : 100 * Math.max( 1, incorrect - correct ) ); // Simple weight calculation
             weight = Math.max(weight, 1); // Ensure at least a weight of 1
-            console.log(word, weight);
+            // console.log(word, weight);
 
             for (let i = 0; i < weight; i++) {
                 selectionPool.push(word); // Add the word 'weight' times to the pool
@@ -534,6 +534,7 @@
         document.getElementById('statusText').innerText = "Listen and type the spelling.";
         document.getElementById('userInput').disabled = false;
         document.getElementById('submitAnswerButton').disabled = false;
+        document.getElementById('userInput').focus();
     }
 
     function submitAnswer() {
