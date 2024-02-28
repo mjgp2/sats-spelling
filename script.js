@@ -408,7 +408,7 @@
 
     let score = 0;
     let attempts = 0;
-    const testSize = 5;
+    const testSize = 10;
     let currentWord;
 
     let countdown; // Holds the countdown interval object
