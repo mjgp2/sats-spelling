@@ -534,18 +534,38 @@
         resultsContainer.appendChild(card);
     }
     
+    function resetKeyboardSuggestions() {
+        userInput.type = 'password';
+        setTimeout(() => {
+            userInput.type = 'text';
+            // Optionally, focus the dummy input and then refocus the user input
+            dummyInput.focus();
+            setTimeout(() => {
+                userInput.focus();
+            }, 0);
+        }, 0);
+    }
 
     document.getElementById('startTestButton').addEventListener('click', initializeTest);
     document.getElementById('submitAnswerButton').addEventListener('click', submitAnswer);
-    document.getElementById('userInput').addEventListener('keypress', function(e) {
-        updateLearnedWordsDisplay();
+
+    const userInput = document.getElementById('userInput');
+    const dummyInput = document.getElementById('dummyInput');
+
+    userInput.addEventListener('focus', resetKeyboardSuggestions);
+
+    userInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !this.disabled) {
             submitAnswer();
+            return;
         }
+        resetKeyboardSuggestions();
     });
+
     document.addEventListener('DOMContentLoaded', (event) => {
         updateLearnedWordsDisplay();
         displayTestResults(loadWordAttempts());
+        
     });
 
 
